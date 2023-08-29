@@ -12,7 +12,8 @@ export default defineConfig({
 				manualChunks: undefined,
 				entryFileNames: '[name].js',
 				assetFileNames: '[name].[ext]'
-			}
+			},
+			external: ["obsidian"]
 		}
 	}
 });
