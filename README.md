@@ -1,7 +1,7 @@
 # Obsidian Sample Imba Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
-It supports building plugins using Imba (https://imba.io).
+This is a sample plugin for [Obsidian](https://obsidian.md).
+It supports building plugins using [Imba](https://imba.io).
 
 ## Benefits
 
