@@ -6,10 +6,7 @@ It supports building plugins using [Imba](https://imba.io).
 ## Benefits
 
 ### 1. Quickly prototype your plugin idea with Imba
-If you enjoy using Obsidian and want to create plugins for it, 
-this template gives you a chance to use Imba as your preferred language.
-
-Simply clone it, install the dependencies and start creating. 
+If you enjoy using Obsidian and want to create plugins for it, this template gives you a chance to use Imba as your preferred language. Simply clone it, install the dependencies and start creating. 
 
 Take a look at the "Getting started" section for detailed guidance.
 
