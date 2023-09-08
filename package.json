@@ -1,11 +1,12 @@
 {
   "name": "obsidian-sample-imba-plugin",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Sample plugin for Obsidian (https://obsidian.md), built with Imba (https://imba.io).",
   "main": "main.js",
   "scripts": {
-    "dev": "vite build && cpy manifest.json dist && vite build -w",
-    "build": "vite build && cpy manifest.json dist && rimraf dist/style.js"
+    "dev": "vite build -m development -w",
+    "build": "vite build",
+    "version": "node version-bump.mjs"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,11 @@
     "url": "https://github.com/rudylattae/obsidian-sample-imba-plugin/issues"
   },
   "homepage": "https://github.com/rudylattae/obsidian-sample-imba-plugin#readme",
-	"devDependencies": {
-    "cpy-cli": "^5.0.0",
-    "rimraf": "^5.0.1",
+  "devDependencies": {
+    "imba": "^2.0.0-alpha.231",
+    "obsidian": "latest",
+    "rollup-plugin-copy-assets": "^2.0.3",
     "vite": "^4.4.9",
-    "vite-plugin-imba": "^0.10.3",
-		"obsidian": "latest",
-    "imba": "^2.0.0-alpha.231"
-	}
+    "vite-plugin-imba": "^0.10.3"
+  }
 }
