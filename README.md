@@ -1,6 +1,6 @@
 # Create Obsidian Plugins with Imba
 
-This repo is a started template for building an [Obsidian](https://obsidian.md) using [Imba](https://imba.io).
+This repo is a starter template for building an [Obsidian](https://obsidian.md) plugin using [Imba](https://imba.io).
 To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
 
 ## Speedrun
