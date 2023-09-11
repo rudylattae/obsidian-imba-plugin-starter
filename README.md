@@ -74,7 +74,7 @@ See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Deve
 > TODO 
 > Mapping the `Reload app without saving` command to `ctrl+R` 
 > Using [Hot-Reload](https://github.com/pjeby/hot-reload) with the `.hotreload` file
-> Developing outside the [Sandbox Vault](#sandbox-vault)
+> Developing outside the [Sandbox Vault](#sandbox-vault) with `OBSIDIAN_SANDBOX_VAULT_PATH` environment variable
 
 ## Caveats
 This is an alpha-level experiment with warts, please proceed with caution.
