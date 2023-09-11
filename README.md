@@ -50,7 +50,7 @@ TODO
 ## Sandbox Vault
 While building your Obsidian plugin, it is possible to do serious damage to the data in your vault. To minimize risk to your data, you should consider developing and testing your plugin in a "sandbox". A sandbox is any vault that has only test files, NOT your actual notes. 
 
-With this approach, even if your plugin code (un?)intentionally does something wild and nules all the data and files, you can rest easy knowing your real data is safe.
+With this approach, even if your plugin code (un?)intentionally does something wild and nukes all the data and files, you can rest easy knowing your real data is safe.
 
 To setup a sandbox, 
 1. Create a new vault, name it something like "My Sandbox" or "obsidian-sandbox". 
@@ -63,5 +63,23 @@ In the [Development flow state](#development-flow-state) section, we'll take a l
 ## Development flow state
 See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Development+workflow) to get a basic idea of how plugin development goes in "Obsidianland". If you followed the steps in the [speedrun](#speedrun), you will be using the approach where you develop your plugin inside a folder within your "sandbox".
 
+## Caveats
+This is an alpha-level experiment with warts, please proceed with caution.
 
+- [ ] Type sense is not available for the `Obsidian API` in `.imba` files
+- [ ] Generated source maps are useless as they do not tie back to the Imba source
+- [ ] When used with the "Hot Reload" plugin, Imba component re-mounts result in an error message. 
+    - Workaround: Reload plugin / Refresh obsidian, i.e. `Reload app without saving` command.
 
+## References
+Here are some useful tidbits for Obsidian Plugin Developers
+
+- [Obsidian Developer Docs](https://docs.obsidian.md)
+    - How to build and package plugins and themes
+    - Docs for the Obsidan API
+    - How to publish your plugin
+- [Obsidian API](https://github.com/obsidianmd/obsidian-api)
+    - start in the `obsidian.d.ts` file
+- [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin)
+    - Official sample plugin based on [TypeScript](https://www.typescriptlang.org/)
+    
