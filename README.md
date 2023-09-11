@@ -4,7 +4,7 @@ This repo is a starter template for building an [Obsidian](https://obsidian.md) 
 To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
 
 ## Speedrun
-If you want to get started with this template in the most straight-forward way, follow the steps below.
+If you have Obsidian and Nodejs (+npm) installed and want to get started with this template in the most straight-forward way, follow the steps below.
 
 1. Create a new repository from this template to start a new plugin
     - See [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) for howto.
