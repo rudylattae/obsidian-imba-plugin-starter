@@ -14,7 +14,7 @@ export default class MyPlugin < Plugin
 		await loadSettings!
 
 		# add an icon to the ribbon for an action
-		ribbonIconEl = addRibbonIcon 'dice', 'My Sample Plugin', do(evt) new Notice 'This is NOTICE 2!'
+		ribbonIconEl = addRibbonIcon 'list-tree', 'My Sample Plugin', do(evt) new Notice 'This is NOTICE 2!'
 
 		# add text to status bar
 		const statusBarItemEl = addStatusBarItem()
