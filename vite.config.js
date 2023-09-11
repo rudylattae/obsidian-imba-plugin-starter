@@ -6,6 +6,7 @@ import pkg from './package.json' assert { type: 'json' };
 
 
 const logger = createLogger();
+
 const defaultConfig = {
 	plugins: [
 		imba()
@@ -28,34 +29,39 @@ const defaultConfig = {
 	}
 };
 
+function getTestVaultPluginsPath(pkg, env) {
+	if (env.OBSIDIAN_SANDBOX_VAULT_PATH !== undefined && env.OBSIDIAN_SANDBOX_VAULT_PATH !== "") {
+		return path.join(env.OBSIDIAN_SANDBOX_VAULT_PATH, '.obsidian', 'plugins', pkg.name);
+	}
+	return false;
+}
+
 export default defineConfig(({ command, mode, ssrBuild }) => {
 
-	let outDir = path.resolve('./dist');
+	let outDir = path.resolve('.');
+	let assetsToCopy = [];
 	const env = loadEnv(mode, process.cwd(), '');
-	if (env.OBSIDIAN_TEST_VAULT_PATH !== undefined && env.OBSIDIAN_TEST_VAULT_PATH !== "") {
-		const obsidianTestVaultPath = env.OBSIDIAN_TEST_VAULT_PATH;
-		const obsidianTestVaultPluginsPath = path.join(obsidianTestVaultPath, '.obsidian', 'plugins', pkg.name);
-		outDir = obsidianTestVaultPluginsPath;
-		logger.info(`Sending build output to ${outDir}`);
-	} else {
-		logger.warn('No value found for OBSIDIAN_TEST_VAULT_PATH in .env, ignoring.')
-	}
+	const obsidianTestVaultPluginsPath = getTestVaultPluginsPath(pkg, env) 
 
 	if (mode === 'development') {
+		if (obsidianTestVaultPluginsPath) {
+			outDir = obsidianTestVaultPluginsPath;
+			assetsToCopy = [
+				'manifest.json',
+				'.hotreload'
+			]
+		}
+
 		return mergeConfig(
 			defaultConfig,
 			{
 				plugins: [
 					copyAssets({
-						assets: [
-							'manifest.json',
-							'.hotreload'
-						]
+						assets: assetsToCopy
 					})
 				],
 				build: {
 					outDir: outDir,
-					emptyOutDir: true,
 					minify: false,
 					sourcemap: 'inline',
 				}
