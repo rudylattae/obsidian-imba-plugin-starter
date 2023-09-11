@@ -1,5 +1,8 @@
 # Create Obsidian Plugins with Imba
 
+[!WARNING]
+This is an experiment in the works. See [Caveats](#caveats) for known issues.
+
 This repo is a starter template for building an [Obsidian](https://obsidian.md) plugin using [Imba](https://imba.io).
 To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
 
@@ -68,6 +71,7 @@ See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Deve
 This is an alpha-level experiment with warts, please proceed with caution.
 
 - [ ] Type sense is not available for the `Obsidian API` in `.imba` files
+- [ ] Linting is showing errors that do not make sense
 - [ ] Generated source maps are useless as they do not tie back to the Imba source
 - [ ] When used with the "Hot Reload" plugin, Imba component re-mounts result in an error message. 
     - Workaround: Reload plugin / Refresh obsidian, i.e. `Reload app without saving` command.
