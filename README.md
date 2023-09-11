@@ -46,6 +46,8 @@ Use `npm run build` to bundle and minify your Imba code into compact JavaScript 
 ## Features
 When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the following features:
 - Adds a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions), which when clicked, shows a Notification
+- Adds a Modal which contains a mounted Imba component `<my-counter>`
+- Adds a command to show the Modal
 
 
 ## Usage
