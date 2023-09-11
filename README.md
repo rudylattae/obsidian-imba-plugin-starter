@@ -96,4 +96,6 @@ Here are some useful tidbits for Obsidian Plugin Developers
     - start in the `obsidian.d.ts` file
 - [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin)
     - Official sample plugin based on [TypeScript](https://www.typescriptlang.org/)
+- [Awesome Obsidian](https://github.com/kmaasrud/awesome-obsidian#for-developers)
+- Obsidian and Imba on Discord 
     
