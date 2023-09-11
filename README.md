@@ -1,7 +1,7 @@
 # Create Obsidian Plugins with Imba
 
 > [!WARNING]
-> This is an experiment in the works. See [Caveats](#caveats) for known issues.
+> This is an experiment in the works. See [Known issues](#known-issues) for what's not so great right now.
 
 This repo is a starter template for building an [Obsidian](https://obsidian.md) plugin using [Imba](https://imba.io).
 To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
@@ -46,8 +46,9 @@ Use `npm run build` to bundle and minify your Imba code into compact JavaScript 
 ## Features
 When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the following features:
 - Adds a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions), which when clicked, shows a Notification
-- Adds a Modal which contains a mounted Imba component `<my-counter>`
-- Adds a command to show the Modal
+- Adds a `Modal` which contains a mounted Imba component `<basic-counter>`
+- Adds a `Command`, `Show Basic Counter`, which shows the modal containing the counter
+- Adds the text "Imba Starter" to the `Status bar`
 
 
 ## Usage
@@ -78,14 +79,20 @@ See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Deve
 > Using [Hot-Reload](https://github.com/pjeby/hot-reload) with the `.hotreload` file
 > Developing outside the [Sandbox Vault](#sandbox-vault) with `OBSIDIAN_SANDBOX_VAULT_PATH` environment variable
 
-## Caveats
+## Known issues
 This is an alpha-level experiment with warts, please proceed with caution.
 
 - [ ] Type sense is not available for the `Obsidian API` in `.imba` files
+- [ ] Refactoring, i.e. renaming with say `F2` is not supported
 - [ ] Linting is showing errors that do not make sense
 - [ ] Generated source maps are useless as they do not tie back to the Imba source
+```
+(vite-plugin-imba plugin) Sourcemap is likely to be incorrect: a plugin (vite-plugin-imba) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help
+```
+
 - [ ] When used with the "Hot Reload" plugin, Imba component re-mounts result in an error message. 
     - Workaround: Reload plugin / Refresh obsidian, i.e. `Reload app without saving` command.
+- [ ] No automated unit or e2e tests
 
 ## References
 Here are some useful tidbits for Obsidian Plugin Developers

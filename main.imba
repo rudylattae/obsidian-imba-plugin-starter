@@ -14,7 +14,7 @@ export default class ImbaPluginStarter < Plugin
 		await loadSettings!
 
 		# add an icon to the ribbon for an action
-		ribbonIconEl = addRibbonIcon 'list-tree', 'Hello Imba Starter', do(evt) new Notice 'This is NOTICE 2!'
+		ribbonIconEl = addRibbonIcon 'list-tree', 'Hello Imba Starter', do(evt) new Notice 'Hello from the Imba Starter!'
 
 		# add text to status bar
 		const statusBarItemEl = addStatusBarItem()
