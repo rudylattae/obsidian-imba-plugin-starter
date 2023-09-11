@@ -1,7 +1,7 @@
 # Create Obsidian Plugins with Imba
 
-[!WARNING]
-This is an experiment in the works. See [Caveats](#caveats) for known issues.
+> [!WARNING]
+> This is an experiment in the works. See [Caveats](#caveats) for known issues.
 
 This repo is a starter template for building an [Obsidian](https://obsidian.md) plugin using [Imba](https://imba.io).
 To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
@@ -41,7 +41,7 @@ This starter comes with the usual `npm run dev` to watch for changes in your `.i
 See the "Flow state" for guidance on how to setup a seamless integration with Obsidian in order to live test your plugin as you build it.
 
 ### 3. Easily build an optimized version of your plugin to publish 
-Bundle and minify your Imba code into compact JavaScript and CSS.
+Use `npm run build` to bundle and minify your Imba code into compact JavaScript and CSS. The relevant files are rendered into a `./dist` directory for easy copy/pasta into a realease.
 
 ## Features
 When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the following features:
@@ -49,7 +49,10 @@ When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the
 
 
 ## Usage
-TODO
+> [!NOTE]
+> TODO 
+> Develop plugin
+> Release plugin
 
 ## Sandbox Vault
 While building your Obsidian plugin, it is possible to do serious damage to the data in your vault. To minimize risk to your data, you should consider developing and testing your plugin in a "sandbox". A sandbox is any vault that has only test files, NOT your actual notes. 
@@ -66,6 +69,12 @@ In the [Development flow state](#development-flow-state) section, we'll take a l
 
 ## Development flow state
 See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Development+workflow) to get a basic idea of how plugin development goes in "Obsidianland". If you followed the steps in the [speedrun](#speedrun), you will be using the approach where you develop your plugin inside a folder within your "sandbox".
+
+> [!NOTE]
+> TODO 
+> Mapping the `Reload app without saving` command to `ctrl+R` 
+> Using [Hot-Reload](https://github.com/pjeby/hot-reload) with the `.hotreload` file
+> Developing outside the [Sandbox Vault](#sandbox-vault)
 
 ## Caveats
 This is an alpha-level experiment with warts, please proceed with caution.
