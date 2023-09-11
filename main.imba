@@ -6,7 +6,7 @@ const DEFAULT_SETTINGS =
 	someText: 'Change me'
 	someToggle: yes
 
-export default class MyPlugin < Plugin
+export default class ImbaPluginStarter < Plugin
 	settings
 
 	def onload
@@ -14,23 +14,23 @@ export default class MyPlugin < Plugin
 		await loadSettings!
 
 		# add an icon to the ribbon for an action
-		ribbonIconEl = addRibbonIcon 'list-tree', 'My Sample Plugin', do(evt) new Notice 'This is NOTICE 2!'
+		ribbonIconEl = addRibbonIcon 'list-tree', 'Hello Imba Starter', do(evt) new Notice 'This is NOTICE 2!'
 
 		# add text to status bar
 		const statusBarItemEl = addStatusBarItem()
-		statusBarItemEl.setText('Here I am')
+		statusBarItemEl.setText('Imba Starter')
 
 		# add command to show modal
 		addCommand({
-			id: 'open-my-plugin-modal',
-			name: 'Open My Plugin Modal',
+			id: 'show-basic-counter',
+			name: 'Show Basic Counter',
 			callback: do 
-				const m = new MyPluginModal(app)
+				const m = new BasicCounterModal(app)
 				m.open!
 		})
 
 		# add settings tab for this plugin
-		addSettingTab new MyPluginSettingTab(app, self)
+		addSettingTab new ImbaStarterSettingTab(app, self)
 
 	def onunload
 		# handle stuff that need to happen when the plugin is disabled
@@ -42,24 +42,24 @@ export default class MyPlugin < Plugin
 	def saveSettings
 		await saveData(settings)
 
-tag my-counter
+tag basic-counter
 	count = 0
 	<self @click=count++> "Clicked {count} times!"
 
-class MyPluginModal < Modal
-	counter\my-counter
+class BasicCounterModal < Modal
+	counter\basic-counter
 
 	constructor app\App
 		super
 
 	def onOpen
-		counter = <my-counter>
+		counter = <basic-counter>
 		imba.mount counter, contentEl
 
 	def onClose
 		imba.unmount counter
 
-class MyPluginSettingTab < PluginSettingTab
+class ImbaStarterSettingTab < PluginSettingTab
 	plugin\MyPlugin
 
 	constructor app\App, plugin\MyPlugin

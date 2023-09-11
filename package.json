@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-sample-imba-plugin",
+  "name": "obsidian-imba-plugin-starter",
   "version": "0.0.1",
-  "description": "Sample plugin for Obsidian (https://obsidian.md), built with Imba (https://imba.io).",
+  "description": "Create [Obsidian](https://obsidian.md) plugins with [Imba](https://imba.io).",
   "main": "main.js",
   "scripts": {
     "dev": "vite build -m development -w",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rudylattae/obsidian-sample-imba-plugin.git"
+    "url": "git+https://github.com/rudylattae/obsidian-imba-plugin-starter.git"
   },
   "keywords": [],
   "author": "Rudy Lattae",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rudylattae/obsidian-sample-imba-plugin/issues"
+    "url": "https://github.com/rudylattae/obsidian-imba-plugin-starter/issues"
   },
-  "homepage": "https://github.com/rudylattae/obsidian-sample-imba-plugin#readme",
+  "homepage": "https://github.com/rudylattae/obsidian-imba-plugin-starter#readme",
   "devDependencies": {
     "imba": "^2.0.0-alpha.231",
     "obsidian": "latest",

@@ -1,6 +1,6 @@
 {
-	"id": "obsidian-sample-imba-plugin",
-	"name": "Sample Imba Plugin",
+	"id": "imba-plugin-starter",
+	"name": "Imba Plugin Starter",
 	"version": "0.0.1",
 	"minAppVersion": "0.9.12",
 	"description": "Sample plugin for Obsidian (https://obsidian.md), built with Imba (https://imbajs.io/).",
