@@ -25,7 +25,7 @@ export default class ImbaPluginStarter < Plugin
 			id: 'show-basic-counter',
 			name: 'Show Basic Counter',
 			callback: do 
-				const m = new BasicCounterModal(app)
+				const m = new TallyModal(app)
 				m.open!
 		})
 
@@ -42,22 +42,50 @@ export default class ImbaPluginStarter < Plugin
 	def saveSettings
 		await saveData(settings)
 
-tag basic-counter
-	count = 0
-	<self @click=count++> "Clicked {count} times!"
+class ValueRegister
+	startValue = 0
+	value = startValue
+	def inc
+		value++
+	def dec
+		value--
+	def reset 
+		value = startValue
 
-class BasicCounterModal < Modal
-	counter\basic-counter
+tag ValueDisplay
+	prop register\ValueRegister
+	<self> "Count = {register.value}!"
+
+tag CounterButton < button
+	prop step = 1
+	<self @click=emit('record', {step:1})> <slot> "➕ {step}"
+
+tag ResetButton < button
+	<self @click=emit('reset')> <slot> 'Reset'
+
+class TallyModal < Modal
+	register\ValueRegister
+	display\ValueDisplay
+	clicker\CounterButton
+	reset\ResetButton
 
 	constructor app\App
 		super
+		register = new ValueRegister {startValue:10}
 
 	def onOpen
-		counter = <basic-counter>
-		imba.mount counter, contentEl
+		display = <ValueDisplay register=register>
+		clicker = <CounterButton @record=register.inc>
+		reset = <ResetButton[ml:1rem] @reset=register.reset>
+
+		imba.mount display, titleEl
+		imba.mount clicker, contentEl
+		imba.mount reset, contentEl
 
 	def onClose
-		imba.unmount counter
+		imba.unmount display
+		imba.unmount clicker
+		imba.unmount reset
 
 class ImbaStarterSettingTab < PluginSettingTab
 	plugin\MyPlugin
