@@ -182,7 +182,7 @@ export default class ImbaPluginStarter < Plugin
 				callback: do openTallyCounterModal!
 					
 			})
-
+			
 		# wire up items related to the Background activity Simulator
 		if settings.enableBackgroundActivitySimulator
 			# add indicator in status bar
