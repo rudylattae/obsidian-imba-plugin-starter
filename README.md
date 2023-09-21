@@ -10,14 +10,14 @@ To take it for a quick test-drive, follow the steps in [Speedrun](#speedrun).
 If you have Obsidian and Nodejs (+npm) installed and want to get started with this template in the most straight-forward way, follow the steps below.
 
 1. Create a new repository from this template to start a new plugin
-    - See [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) for howto.
-2. Clone your repo into the `.obsidian\plugins` directory of you [Sandbox Vault](#sandbox-vault) and cd into it
-3. Edit the [package.json](./package.json), [manifest.json](./manifest.json), [LICENSE](./LICENSE) and [README](./README.md)files to fit your plugin
+    - See [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) for how-to.
+2. Clone your repo into the `.obsidian\plugins` directory of you [Test Vault](#test-vault) and cd into it
+3. Edit the [package.json](./package.json), [manifest.json](./manifest.json), [LICENSE](./LICENSE) and [README](./README.md) files to fit your plugin
 3. Run `npm install` to bring in all the dependencies
 4. Run `npn run dev` to compile the plugin
     - `main.imba` -> `main.js`
     -  `styles.imba` -> `styles.css`
-5. Open your Obsidian [Sandbox Vault](#sandbox-vault) and enable the `Imba Template` plugin
+5. Open your Obsidian [Test Vault](#test-vault) and enable the `Imba Template` plugin
 6. You may now interact with the plugin functionality in Obsidian
 7. When you are ready to build a package, run `npm run build` to send minified output to the `./dist` folder
     - `main.imba` -> `./dist/main.js`
@@ -44,11 +44,11 @@ See the "Flow state" for guidance on how to setup a seamless integration with Ob
 Use `npm run build` to bundle and minify your Imba code into compact JavaScript and CSS. The relevant files are rendered into a `./dist` directory for easy copy/pasta into a realease.
 
 ## Features
-When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the following features:
-- Adds a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions), which when clicked, shows a Notification
-- Adds a `Modal` which contains a mounted Imba component `<basic-counter>`
-- Adds a `Command`, `Show Basic Counter`, which shows the modal containing the counter
-- Adds the text "Imba Starter" to the `Status bar`
+When installed in your [Test Vault](#test-vault), this plugin provides the following features:
+- Launch a Modal from a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions) and a Command.
+- Show Notifications before running and after running a background task.
+- Add an interactive component to the Obsidian Status Bar -- click to trigger a background task
+- Modify the behaviour of the plugin via Settings
 
 
 ## Usage
@@ -57,27 +57,25 @@ When installed in your [Sandbox Vault](#sandbox-vault), this plugin provides the
 > Develop plugin
 > Release plugin
 
-## Sandbox Vault
-While building your Obsidian plugin, it is possible to do serious damage to the data in your vault. To minimize risk to your data, you should consider developing and testing your plugin in a "sandbox". A sandbox is any vault that has only test files, NOT your actual notes. 
+## Test Vault
+While building your Obsidian plugin, it is possible to damage the data in your vault. To minimize risk to your data, consider developing and testing your plugin in a test vault. A test vault is any vault that has only test files, NOT your actual notes. 
 
 With this approach, even if your plugin code (un?)intentionally does something wild and nukes all the data and files, you can rest easy knowing your real data is safe.
 
-To setup a sandbox, 
-1. Create a new vault, name it something like "My Sandbox" or "obsidian-sandbox". 
-2. Develop and install your plugin in the sandbox
+To setup a test vault, 
+1. Create a new vault, name it something like "My Test Vault" or "obsidian-test-vault". 
+2. Develop and install your plugin in the test vault
 
-There are some "test data" repositories provided by the Obsidian Community that can be used 
+In the [Development flow](#development-flow) section, we'll take a look at how you can develop your plugin outside of the Test Vault and still test your plugin in the sandbox.
 
-In the [Development flow state](#development-flow-state) section, we'll take a look at how you can develop your plugin outside of the Sandbox Vault and still test your plugin in the sandbox.
-
-## Development flow state
+## Development flow
 See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Development+workflow) to get a basic idea of how plugin development goes in "Obsidianland". If you followed the steps in the [speedrun](#speedrun), you will be using the approach where you develop your plugin inside a folder within your "sandbox".
 
 > [!NOTE]
 > TODO 
 > Mapping the `Reload app without saving` command to `ctrl+R` 
 > Using [Hot-Reload](https://github.com/pjeby/hot-reload) with the `.hotreload` file
-> Developing outside the [Sandbox Vault](#sandbox-vault) with `OBSIDIAN_SANDBOX_VAULT_PATH` environment variable
+> Developing outside the [Test Vault](#test-vault) with `OBSIDIAN_SANDBOX_VAULT_PATH` environment variable
 
 ## Known issues
 This is an alpha-level experiment with warts, please proceed with caution.

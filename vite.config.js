@@ -30,8 +30,8 @@ const defaultConfig = {
 };
 
 function getTestVaultPluginsPath(pkg, env) {
-	if (env.OBSIDIAN_SANDBOX_VAULT_PATH !== undefined && env.OBSIDIAN_SANDBOX_VAULT_PATH !== "") {
-		return path.join(env.OBSIDIAN_SANDBOX_VAULT_PATH, '.obsidian', 'plugins', pkg.name);
+	if (env.OBSIDIAN_TEST_VAULT_PATH !== undefined && env.OBSIDIAN_TEST_VAULT_PATH !== "") {
+		return path.join(env.OBSIDIAN_TEST_VAULT_PATH, '.obsidian', 'plugins', pkg.name);
 	}
 	return false;
 }
