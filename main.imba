@@ -22,12 +22,11 @@ Stuff related to the tally counter functionality
 ###
 class ValueRegister
 	startValue = 0
-	stepBy = 1
 	value = startValue
-	def inc
-		value = value + stepBy
-	def dec
-		value-=stepBy
+	def inc step
+		value += step
+	def dec step
+		value -= step
 	def reset 
 		value = startValue
 
@@ -51,11 +50,11 @@ class TallyCounterModal < Modal
 	constructor app\App, settings
 		super
 		#stepBy = settings.tallyCounterStepBy
-		register = new ValueRegister {startValue: settings.tallyCounterStartFrom, stepBy: #stepBy}
+		register = new ValueRegister {startValue: settings.tallyCounterStartFrom}
 
 	def onOpen
 		display = <ValueDisplay register=register>
-		clicker = <CounterButton @record=register.inc step=#stepBy>
+		clicker = <CounterButton @record=(do(e) register.inc e.detail.step) step=#stepBy>
 		reset = <ResetButton[ml:1rem] @reset=register.reset>
 
 		imba.mount display, titleEl
@@ -182,7 +181,7 @@ export default class ImbaPluginStarter < Plugin
 				callback: do openTallyCounterModal!
 					
 			})
-			
+
 		# wire up items related to the Background activity Simulator
 		if settings.enableBackgroundActivitySimulator
 			# add indicator in status bar
