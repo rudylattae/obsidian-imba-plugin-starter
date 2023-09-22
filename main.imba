@@ -74,9 +74,9 @@ Stuff related to the background activity simulator functionality
 tag StatusIndicator
 	prop busy = no
 	get state
-		if !busy 
+		if !busy
 			'✅'
-		else 
+		else
 			'🔃'
 	def doing
 		busy = yes
@@ -179,7 +179,6 @@ export default class ImbaPluginStarter < Plugin
 				id: 'open-tally-counter',
 				name: 'Open Tally Counter',
 				callback: do openTallyCounterModal!
-					
 			})
 
 		# wire up items related to the Background activity Simulator
