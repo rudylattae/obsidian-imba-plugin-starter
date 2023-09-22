@@ -46,7 +46,7 @@ Use `npm run build` to bundle and minify your Imba code into compact JavaScript 
 ## Features
 When installed in your [Test Vault](#test-vault), this plugin provides the following features:
 - Launch a Modal from a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions) and a Command.
-- Show Notifications before running and after running a background task.
+- Show Notifications before and after running a background task.
 - Add an interactive component to the Obsidian Status Bar -- click to trigger a background task
 - Modify the behaviour of the plugin via Settings
 
@@ -75,7 +75,7 @@ See [Development workflow](https://docs.obsidian.md/Plugins/Getting+started/Deve
 > TODO 
 > Mapping the `Reload app without saving` command to `ctrl+R` 
 > Using [Hot-Reload](https://github.com/pjeby/hot-reload) with the `.hotreload` file
-> Developing outside the [Test Vault](#test-vault) with `OBSIDIAN_SANDBOX_VAULT_PATH` environment variable
+> Developing outside the [Test Vault](#test-vault) with `OBSIDIAN_TEST_VAULT_PATH` environment variable
 
 ## Known issues
 This is an alpha-level experiment with warts, please proceed with caution.
