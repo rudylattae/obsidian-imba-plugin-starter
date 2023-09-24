@@ -13,7 +13,9 @@ const DEFAULT_SETTINGS =
 	tallyCounterStepBy: 1
 	enableBackgroundActivitySimulator: yes
 	backgroundActivityDuration: 1500
-	backgroundActivityCompletionMessage: "Done pretending!"
+	backgroundActivityCompletionMessage: 'Done pretending!'
+	enableDemoView: yes
+const DEMO_VIEW = 'demo-view'
 
 
 ###
@@ -83,6 +85,36 @@ tag StatusIndicator
 	def done
 		busy = no
 	<self @click=emit('look-busy')> "Imba Plugin Starter: {state}"
+
+
+###
+==================== demo view ====================
+###
+class DemoView < ItemView
+	leaf\WorskpaceLeaf
+	settings
+
+	constructor leaf\WorkspaceLeaf, settings
+		super
+		leaf = leaf
+		settings = settings
+
+	def getViewType
+		DEMO_VIEW
+
+	def getDisplayText
+		"Demo View";
+
+	def getIcon
+		'activity'
+
+	def onOpen
+		const contentEl = containerEl.children[1]
+		console.dir containerEl
+
+	def onClose
+		pass
+
 
 
 ###
@@ -195,6 +227,17 @@ export default class ImbaPluginStarter < Plugin
 				callback: do simulateBackgroundActivity!
 			})
 
+		# wire up view
+		if settings.enableDemoView
+			registerView(DEMO_VIEW, do(leaf\WorkspaceLeaf) new DemoView(leaf, settings))
+
+			# add command to show the demo view
+			addCommand({
+				id: 'show-demo-view',
+				name: 'Show Demo View',
+				callback: do showDemoView!
+			})
+
 		# add settings tab for this plugin
 		addSettingTab new ImbaStarterSettingTab(app, self)
 
@@ -211,6 +254,15 @@ export default class ImbaPluginStarter < Plugin
 			statusIndicator.done!
 			imba.commit! # another commit
 			new Notice settings.backgroundActivityCompletionMessage
+
+	def showDemoView
+		const views = await app.workspace.getLeavesOfType(DEMO_VIEW)
+		if views.length === 0
+			await app.workspace.getRightLeaf(false).setViewState({
+				type: DEMO_VIEW
+				active: true
+			})
+		app.workspace.revealLeaf app.workspace.getLeavesOfType(DEMO_VIEW)[0]
 
 	def onunload
 		# handle stuff that need to happen when the plugin is disabled
