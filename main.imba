@@ -4,6 +4,20 @@ import * as manifest from './manifest.json'
 
 
 ###
+==================== obsidian-styled elements ====================
+These are convenient little elements (tags) that have the requisite styles
+###
+tag obsidian-switch
+	prop enabled = no
+	<self.checkbox-container .is-enabled=enabled @click=(enabled = !enabled)>
+			<input type="checkbox" bind=enabled tabindex="0">
+
+tag obsidian-text < input
+	prop type = 'input'
+	<self type=type spellcheck='false'>
+
+
+###
 ==================== defaults ====================
 Global defaults and contants for this plugin
 ###
@@ -23,25 +37,43 @@ const DEMO_VIEW = 'demo-view'
 Stuff related to the tally counter functionality
 ###
 class ValueRegister
-	startValue = 0
-	value = startValue
+	constructor initial = 0
+		initial = initial
+		current = initial
+
 	def inc step
-		value += step
+		current += step
 	def dec step
-		value -= step
+		current -= step
 	def reset 
-		value = startValue
+		current = initial
 
 tag ValueDisplay
 	prop register\ValueRegister
-	<self> "Count = {register.value}!"
+	<self> "Count = {register.current}"
 
 tag CounterButton < button
 	prop step = 1
-	<self @click=emit('record', {step:step})> <slot> "➕ {step}"
+	<self @click=emit('count', {step:step})> <slot> "➕ {step}"
 
 tag ResetButton < button
 	<self @click=emit('reset')> <slot> 'Reset'
+
+tag TallyCounter
+	prop initial
+	prop step
+	
+	get register
+		if !#register 
+			#register = new ValueRegister initial
+		#register
+
+	css d:hflex mb:1rem
+
+	<self>
+		<CounterButton step=step @count=(do(e) register.inc e.detail.step )>
+		<ResetButton[ml:0.5rem] @reset=register.reset>
+		<ValueDisplay[ml:0.5rem] register=register>
 
 class TallyCounterModal < Modal
 	register\ValueRegister
@@ -52,11 +84,11 @@ class TallyCounterModal < Modal
 	constructor app\App, settings
 		super
 		#stepBy = settings.tallyCounterStepBy
-		register = new ValueRegister {startValue: settings.tallyCounterStartFrom}
+		register = new ValueRegister settings.tallyCounterStartFrom
 
 	def onOpen
 		display = <ValueDisplay register=register>
-		clicker = <CounterButton @record=(do(e) register.inc e.detail.step) step=#stepBy>
+		clicker = <CounterButton @count=(do(e) register.inc e.detail.step) step=#stepBy>
 		reset = <ResetButton[ml:1rem] @reset=register.reset>
 
 		imba.mount display, titleEl
@@ -75,24 +107,66 @@ Stuff related to the background activity simulator functionality
 ###
 tag StatusIndicator
 	prop busy = no
+	prop offIndicator = '✅'
+	prop onIndicator = '🔃'
+
 	get state
-		if !busy
-			'✅'
-		else
-			'🔃'
+		busy ? onIndicator : offIndicator
+	
 	def doing
 		busy = yes
+	
 	def done
 		busy = no
+	
 	<self @click=emit('look-busy')> "Imba Plugin Starter: {state}"
 
 
 ###
 ==================== demo view ====================
 ###
+tag DemoFragment
+	prop pluginName
+	prop counterSpecs = []
+
+	css .plugin-name ml:0.5rem pl:0.3rem pr:0.3rem fw:bold bg:yellow8 
+	css h4 bdb:1px solid red
+
+	def rng min, max
+		let a = Math.ceil min
+		let b = Math.floor max
+		Math.floor(Math.random! * (b - a + 1) + a)
+
+	def addNewCounter
+		initial = rng 0, 10
+		step = rng 1, 10
+		counterSpecs.push {initial, step}
+
+	<self>
+		<h2> 'Demo View!'
+		<p> 'This is a demo view from'
+			<span.plugin-name> pluginName
+		<h4> 'Toggle state'
+		<p> '''Click the switch to toggle the state of the status indicator.
+
+		This is the same "StatusIndicator" component shows up in the statusbar. 
+		'''
+		<[d:hflex]>
+			<obsidian-switch$toggle>
+			<StatusIndicator[ml:1rem fs:md] offIndicator='⚪' onIndicator='🟢' busy=$toggle.enabled>
+		
+		<h4> 'Tally Counters'
+		<p> '''Play with multiple "TallyCounter" components
+		The button below will add a new counter with random start and step values.'''
+		<button [mb:1rem] @click=addNewCounter> 'Add New Counter'
+		for spec in counterSpecs
+			<TallyCounter initial=spec.initial step=spec.step>
+		
+
 class DemoView < ItemView
 	leaf\WorskpaceLeaf
 	settings
+	content\DemoWidget
 
 	constructor leaf\WorkspaceLeaf, settings
 		super
@@ -106,14 +180,16 @@ class DemoView < ItemView
 		"Demo View";
 
 	def getIcon
-		'activity'
+		'diff'
 
 	def onOpen
 		const contentEl = containerEl.children[1]
-		console.dir containerEl
+		content = <DemoFragment pluginName=manifest.name>
+		imba.mount content, contentEl
 
 	def onClose
-		pass
+		console.log 'Closed demo view'
+		imba.unmount content
 
 
 
@@ -204,7 +280,7 @@ export default class ImbaPluginStarter < Plugin
 		# wire up items related to Tally counter
 		if settings.enableTallyCounter
 			# add an icon to the ribbon for an action
-			ribbonIconEl = addRibbonIcon 'hand', "Open {manifest.name} View", do(evt) openTallyCounterModal!
+			ribbonIconEl = addRibbonIcon 'bean', "Open {manifest.name} View", do(evt) openTallyCounterModal!
 
 			# add command to open tally counter modal
 			addCommand({

@@ -17,7 +17,7 @@ If you have Obsidian and Nodejs (+npm) installed and want to get started with th
 4. Run `npn run dev` to compile the plugin
     - `main.imba` -> `main.js`
     -  `styles.imba` -> `styles.css`
-5. Open your Obsidian [Test Vault](#test-vault) and enable the `Imba Template` plugin
+5. Open your Obsidian [Test Vault](#test-vault) and enable the `Imba Plugin Starter` plugin
 6. You may now interact with the plugin functionality in Obsidian
 7. When you are ready to build a package, run `npm run build` to send minified output to the `./dist` folder
     - `main.imba` -> `./dist/main.js`
@@ -105,4 +105,19 @@ Here are some useful tidbits for Obsidian Plugin Developers
     - Official sample plugin based on [TypeScript](https://www.typescriptlang.org/)
 - [Awesome Obsidian](https://github.com/kmaasrud/awesome-obsidian#for-developers)
 - Obsidian and Imba on Discord 
-    
+
+## Alternatives
+Other ways to whip up an Obsidian Plugin if Imba is not your thing.
+
+- JavaScript / TypeScript
+    - [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin)
+- React
+    - [obsidian-reaact-starter](https://github.com/obsidian-community/obsidian-react-starter)
+- Vue
+    - [Otto-J/Obsidian-Vue-Starter](https://github.com/Otto-J/Obsidian-Vue-Starter)
+    - [guopenghui/obsidian-vue-starter](https://github.com/guopenghui/obsidian-vue-starter)
+- Svelte
+    - [obsidian-svelte-plugin](https://github.com/emilio-toledo/obsidian-svelte-plugin)
+    - [Obsidian-Svelte-Starter](https://github.com/Quorafind/Obsidian-Svelte-Starter)
+- Rust
+-   [Obsidian Plugin: Rust Bolierplate](https://github.com/trashhalo/obsidian-rust-plugin)
