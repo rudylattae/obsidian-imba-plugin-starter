@@ -102,7 +102,7 @@ Here are some useful tidbits for Obsidian Plugin Developers
 - [Obsidian API](https://github.com/obsidianmd/obsidian-api)
     - start in the `obsidian.d.ts` file
 - [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin)
-    - Official sample plugin based on [TypeScript](https://www.typescriptlang.org/)
+    - Official sample plugin based on JavaScript/[TypeScript](https://www.typescriptlang.org/)
 - [Awesome Obsidian](https://github.com/kmaasrud/awesome-obsidian#for-developers)
 - Obsidian and Imba on Discord 
 
@@ -112,7 +112,7 @@ Other ways to whip up an Obsidian Plugin if Imba is not your thing.
 - JavaScript / TypeScript
     - [Obsidian Sample Plugin](https://github.com/obsidianmd/obsidian-sample-plugin)
 - React
-    - [obsidian-reaact-starter](https://github.com/obsidian-community/obsidian-react-starter)
+    - [obsidian-react-starter](https://github.com/obsidian-community/obsidian-react-starter)
 - Vue
     - [Otto-J/Obsidian-Vue-Starter](https://github.com/Otto-J/Obsidian-Vue-Starter)
     - [guopenghui/obsidian-vue-starter](https://github.com/guopenghui/obsidian-vue-starter)
