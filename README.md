@@ -91,7 +91,7 @@ The plugin registers a markdown code block processor which can parse and render 
 
 ![tally-counter code block](./docs/tally-counter-code-block-example.png)
 
-![Parse and render tally-counter markdown note](./docs/tally-counter-code-block.png)
+![Parse and render tally-counter markdown note](./docs/tally-counter-markdown-note.png)
 
 ### Modify the behaviour of the plugin via Settings
 ![Plugin settings](./docs/settings.png)
