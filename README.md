@@ -12,18 +12,18 @@ If you have Obsidian and Nodejs (+npm) installed and want to get started with th
 1. Create a new repository from this template to start a new plugin
     - See [Creating a repository from a template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) for how-to.
 2. Clone your repo into the `.obsidian\plugins` directory of you [Test Vault](#test-vault) and cd into it
-3. Edit the [package.json](./package.json), [manifest.json](./manifest.json), [LICENSE](./LICENSE) and [README](./README.md) files to fit your plugin
-3. Run `npm install` to bring in all the dependencies
-4. Run `npn run dev` to compile the plugin
+3. Edit the [package.json](./package.json), [manifest.json](./manifest.json), [LICENSE](./LICENSE) and [README](./README.md) files to fit your plugin. Clean out the `./docs` directory
+4. Run `npm install` to bring in all the dependencies
+5. Run `npn run dev` to compile the plugin
     - `main.imba` -> `main.js`
     -  `styles.imba` -> `styles.css`
-5. Open your Obsidian [Test Vault](#test-vault) and enable the `Imba Plugin Starter` plugin
-6. You may now interact with the plugin functionality in Obsidian
-7. When you are ready to build a package, run `npm run build` to send minified output to the `./dist` folder
+6. Open your Obsidian [Test Vault](#test-vault) and enable the `Imba Plugin Starter` plugin
+7. You may now interact with the plugin functionality in Obsidian
+8. When you are ready to build a package, run `npm run build` to send minified output to the `./dist` folder
     - `main.imba` -> `./dist/main.js`
     - `styles.imba` -> `./dist/styles.css`
     - `manifest.json` -> `./dist/manifest.json`
-8. Read the [Plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines) in the [Obsidian Developer Docs](https://docs.obsidian.md) if you want to get your plugin listed on the [Obsidian Plugin Directory](https://obsidian.md/plugins)
+9. Read the [Plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines) in the [Obsidian Developer Docs](https://docs.obsidian.md) if you want to get your plugin listed on the [Obsidian Plugin Directory](https://obsidian.md/plugins)
 
 ## Benefits
 Use this template if you want to:
@@ -84,11 +84,14 @@ It also allows spawning multiple `TallyCounter` components, seeded with random i
 ### Render markdown code block as component
 The plugin registers a markdown code block processor which can parse and render a `TallyCounter` component given a `tally-counter` code block.
 
-> ```tally-counter
+> tally-counter
+>
 > initial:10, step:5, value:100
-> ```
+> 
 
-![Parse and render tally-counter code block](./docs/tally-counter-code-block.png)
+![tally-counter code block](./docs/tally-counter-code-block-example.png)
+
+![Parse and render tally-counter markdown note](./docs/tally-counter-code-block.png)
 
 ### Modify the behaviour of the plugin via Settings
 ![Plugin settings](./docs/settings.png)
