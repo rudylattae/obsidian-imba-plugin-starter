@@ -37,9 +37,9 @@ const DEMO_VIEW = 'demo-view'
 Stuff related to the tally counter functionality
 ###
 class ValueRegister
-	constructor initial = 0
+	constructor initial = 0, current = initial
 		initial = initial
-		current = initial
+		current = current
 
 	def inc step
 		current += step
@@ -50,7 +50,7 @@ class ValueRegister
 
 tag ValueDisplay
 	prop register\ValueRegister
-	<self> "Count = {register.current}"
+	<self> register.current
 
 tag CounterButton < button
 	prop step = 1
@@ -62,18 +62,20 @@ tag ResetButton < button
 tag TallyCounter
 	prop initial
 	prop step
+	prop value
 	
 	get register
 		if !#register 
-			#register = new ValueRegister initial
+			#register = new ValueRegister initial, value
 		#register
 
 	css d:hflex mb:1rem
 
-	<self>
+	<self.tally-counter>
 		<CounterButton step=step @count=(do(e) register.inc e.detail.step )>
 		<ResetButton[ml:0.5rem] @reset=register.reset>
 		<ValueDisplay[ml:0.5rem] register=register>
+			css fs:lg
 
 class TallyCounterModal < Modal
 	register\ValueRegister
@@ -128,18 +130,19 @@ tag StatusIndicator
 tag DemoFragment
 	prop pluginName
 	prop counterSpecs = []
+	prop enableTallyCounter = yes
 
 	css .plugin-name ml:0.5rem pl:0.3rem pr:0.3rem fw:bold bg:yellow8 
-	css h4 bdb:1px solid red
+	css h4 bdb:0.2rem solid $color-accent
 
-	def rng min, max
+	def randomInteger min, max
 		let a = Math.ceil min
-		let b = Math.floor max
-		Math.floor(Math.random! * (b - a + 1) + a)
+		let z = Math.floor max
+		Math.floor(Math.random! * (z - a + 1) + a)
 
 	def addNewCounter
-		initial = rng 0, 10
-		step = rng 1, 10
+		initial = randomInteger 0, 10
+		step = randomInteger 1, 10
 		counterSpecs.push {initial, step}
 
 	<self>
@@ -156,11 +159,15 @@ tag DemoFragment
 			<StatusIndicator[ml:1rem fs:md] offIndicator='⚪' onIndicator='🟢' busy=$toggle.enabled>
 		
 		<h4> 'Tally Counters'
-		<p> '''Play with multiple "TallyCounter" components
-		The button below will add a new counter with random start and step values.'''
-		<button [mb:1rem] @click=addNewCounter> 'Add New Counter'
-		for spec in counterSpecs
-			<TallyCounter initial=spec.initial step=spec.step>
+
+		if enableTallyCounter
+			<p> '''Play with multiple "Tally Counter" components. 
+			The button below will add a new counter with random start and step values.'''
+			<button [mb:1rem] @click=addNewCounter> 'Add New Counter'
+			for spec in counterSpecs
+				<TallyCounter initial=spec.initial step=spec.step>
+		else
+			<p> '❗The Tally Counter is disabled. You may enable it in the settings and reload the plugin.'
 		
 
 class DemoView < ItemView
@@ -180,11 +187,11 @@ class DemoView < ItemView
 		"Demo View";
 
 	def getIcon
-		'diff'
+		'bean'
 
 	def onOpen
 		const contentEl = containerEl.children[1]
-		content = <DemoFragment pluginName=manifest.name>
+		content = <DemoFragment pluginName=manifest.name enableTallyCounter=settings.enableTallyCounter>
 		imba.mount content, contentEl
 
 	def onClose
@@ -280,7 +287,7 @@ export default class ImbaPluginStarter < Plugin
 		# wire up items related to Tally counter
 		if settings.enableTallyCounter
 			# add an icon to the ribbon for an action
-			ribbonIconEl = addRibbonIcon 'bean', "Open {manifest.name} View", do(evt) openTallyCounterModal!
+			ribbonIconEl = addRibbonIcon 'bean', "Open {manifest.name} Tally Counter Modal", do(evt) openTallyCounterModal!
 
 			# add command to open tally counter modal
 			addCommand({
@@ -288,6 +295,11 @@ export default class ImbaPluginStarter < Plugin
 				name: 'Open Tally Counter',
 				callback: do openTallyCounterModal!
 			})
+
+			registerMarkdownCodeBlockProcessor 'tally-counter', do(source, el, ctx) 
+				const spec = parseTallySpec source
+				content = <TallyCounter initial=spec.initial step=spec.step value=spec.value>
+				imba.mount content, el
 
 		# wire up items related to the Background activity Simulator
 		if settings.enableBackgroundActivitySimulator
@@ -340,6 +352,13 @@ export default class ImbaPluginStarter < Plugin
 			})
 		app.workspace.revealLeaf app.workspace.getLeavesOfType(DEMO_VIEW)[0]
 
+	def parseTallySpec source
+		const spec = {}
+		source.split(',').map do(part) 
+			item = part.split(':')
+			spec[item[0]?.trim!] = parseInt(item[1]?.trim!) || 0
+		spec
+		
 	def onunload
 		# handle stuff that need to happen when the plugin is disabled
 		yes

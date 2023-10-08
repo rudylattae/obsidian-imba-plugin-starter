@@ -31,6 +31,8 @@ Use this template if you want to:
 ### 1. Quickly prototype your plugin idea with Imba
 If you enjoy using Obsidian and want to create plugins for it, this template gives you a chance to use Imba as your preferred language. Simply clone it, install the dependencies and start creating. 
 
+It can serve as a quick reference on how to bridge imba components with the Obsidian Developer Api.
+
 Take a look at the "Usage" section for detailed guidance.
 
 ### 2. Live-test your plugin and iterate with a tight feedback loop
@@ -45,11 +47,51 @@ Use `npm run build` to bundle and minify your Imba code into compact JavaScript 
 
 ## Features
 When installed in your [Test Vault](#test-vault), this plugin provides the following features:
-- Launch a Modal from a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions) and a Command.
-- Show Notifications before and after running a background task.
-- Add an interactive component to the Obsidian Status Bar -- click to trigger a background task
-- Modify the behaviour of the plugin via Settings
 
+### Interactive Status Indicator
+![Interactive status indicator in status bar](./docs/status-indicator-in-statusbar.png)
+
+An Imba component `StatusIndicator` that is mounted into the status bar. When clicked, will trigger a background task which also displays notification before and after the task completes.
+
+![Background task notifications](./docs/background-task-notifications.png)
+
+The same simulated background task can be triggered with the command `Imba Plugin Starter: Simulate Background Activity`.
+
+![Simulate background activity command](./docs/similate-background-activity-command.png)
+
+### Tally Counter Modal
+Open a Modal from a [Ribbon icon/action](https://docs.obsidian.md/Plugins/User+interface/Ribbon+actions) and a Command `Imba Plugin Starter: Open Tally Counter`.
+
+![Ribbon icon to open Tally Counter Modal](./docs/ribbon-icon.png)
+
+![Command to open Tally Counter Modal](./docs/open-tally-counter-command.png)
+
+![Tally Counter Modal](./docs/tally-counter-modal.png)
+
+The `Tally Counter Modal` showcases three Imba components `ValueDisplay`, `CounterButton` and `ResetButton`. The components are mounted into different areas in an Obsidian `Modal`. They collaborate through events and a shared in-memory value store, `ValueRegister`, to provide a cohesive UX.
+
+### Demo View
+Show a `View` provided by this plugin by invoking a command `Imba Plugin Starter: Show Demo View`.
+
+![Command to show Demo View](./docs/show-demo-view-command.png)
+
+![Demo View](./docs/demo-view.png)
+
+The `Demo View` showcases component re-use in a different context. It mounts the same `StatusIndicator` component used in the stausbar -- this instance does not trigger any background activity when clicked.
+
+It also allows spawning multiple `TallyCounter` components, seeded with random initial and step values. The `TallyCounter` component, composes the `ValueDisplay`, `CounterButton` and `ResetButton` components in a slightly different manner from the Tally Modal.
+
+### Render markdown code block as component
+The plugin registers a markdown code block processor which can parse and render a `TallyCounter` component given a `tally-counter` code block.
+
+> ```tally-counter
+> initial:10, step:5, value:100
+> ```
+
+![Parse and render tally-counter code block](./docs/tally-counter-code-block.png)
+
+### Modify the behaviour of the plugin via Settings
+![Plugin settings](./docs/settings.png)
 
 ## Usage
 > [!NOTE]
@@ -87,9 +129,9 @@ This is an alpha-level experiment with warts, please proceed with caution.
 ```
 (vite-plugin-imba plugin) Sourcemap is likely to be incorrect: a plugin (vite-plugin-imba) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help
 ```
-
-- [ ] When used with the "Hot Reload" plugin, Imba component re-mounts result in an error message. 
-    - Workaround: Reload plugin / Refresh obsidian, i.e. `Reload app without saving` command.
+- [ ] Does not offer an example of persisted component state
+- [ ] When used with the "Hot Reload" plugin, Imba component re-mounts result in an error message
+    - Workaround: Reload plugin / Refresh obsidian, i.e. `Reload app without saving` command
 - [ ] No automated unit or e2e tests
 
 ## References
