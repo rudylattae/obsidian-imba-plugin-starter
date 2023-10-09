@@ -31,7 +31,7 @@ Use this template if you want to:
 ### 1. Quickly prototype your plugin idea with Imba
 If you enjoy using Obsidian and want to create plugins for it, this template gives you a chance to use Imba as your preferred language. Simply clone it, install the dependencies and start creating. 
 
-It can serve as a quick reference on how to bridge imba components with the Obsidian Developer Api.
+It can serve as a quick reference on how to bridge Imba components with the Obsidian Developer Api.
 
 Take a look at the "Usage" section for detailed guidance.
 

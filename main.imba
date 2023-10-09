@@ -152,7 +152,7 @@ tag DemoFragment
 		<h4> 'Toggle state'
 		<p> '''Click the switch to toggle the state of the status indicator.
 
-		This is the same "StatusIndicator" component shows up in the statusbar. 
+		This is the same "StatusIndicator" component that shows up in the statusbar. 
 		'''
 		<[d:hflex]>
 			<obsidian-switch$toggle>
