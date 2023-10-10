@@ -84,12 +84,11 @@ It also allows spawning multiple `TallyCounter` components, seeded with random i
 ### Render markdown code block as component
 The plugin registers a markdown code block processor which can parse and render a `TallyCounter` component given a `tally-counter` code block.
 
-> tally-counter
->
-> initial:10, step:5, value:100
-> 
-
-![tally-counter code block](./docs/tally-counter-code-block-example.png)
+~~~markdown
+```tally-counter
+initial:10, step:5, value:100
+```
+~~~
 
 ![Parse and render tally-counter markdown note](./docs/tally-counter-markdown-note.png)
 
